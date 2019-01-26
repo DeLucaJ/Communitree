@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60cfebcf434fb477286e0ce5f43504d6, type: 3}
   m_Name: Leaf
   m_EditorClassIdentifier: 
-  lowerBound: 1
-  upperBound: 5
-  image: {fileID: 21300000, guid: 08a2a5b49fd0e7921817b8ba4cea82cd, type: 3}
+  sprite: {fileID: 21300000, guid: 08a2a5b49fd0e7921817b8ba4cea82cd, type: 3}
   type: 0
-  color: {r: 0, g: 1, b: 0, a: 0}
+  color: {r: 0, g: 1, b: 0, a: 1}
