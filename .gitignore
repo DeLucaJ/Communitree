@@ -34,3 +34,8 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+#my test scene
+Assets/Scenes/mitch*
+Assets/Scenes/megan*
+Assets/Scenes/joe*
