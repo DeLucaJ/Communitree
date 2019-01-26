@@ -36,6 +36,6 @@ sysinfo.txt
 *.unitypackage
 
 #my test scene
-Assets/Scenes/mitch*
-Assets/Scenes/megan*
-Assets/Scenes/joe*
+Assets/_Scenes/mitch*
+Assets/_Scenes/megan*
+Assets/_Scenes/joe*
