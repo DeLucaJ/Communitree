@@ -9,6 +9,8 @@ public class Card : MonoBehaviour
     public int lower;
     public int upper;
 
+    public int[] imageLocs;
+
     //scripts in children for modification
     private Image[] images;
     private Text[] texts;
@@ -39,10 +41,10 @@ public class Card : MonoBehaviour
         images = GetComponentsInChildren<Image>();
         texts = GetComponentsInChildren<Text>();
 
-        images[1].sprite = action1.sprite; //skipping 0 because the card image would be grabbed first
-        images[2].sprite = action2.sprite;
-        images[1].color = action1.color;
-        images[2].color = action2.color;
+        images[imageLocs[0]].sprite = action1.sprite; //skipping 0 because the card image would be grabbed first
+        images[imageLocs[1]].sprite = action2.sprite;
+        images[imageLocs[0]].color = action1.color;
+        images[imageLocs[1]].color = action2.color;
 
         texts[0].text = value1.ToString();
         texts[1].text = value2.ToString();
