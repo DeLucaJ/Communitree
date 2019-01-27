@@ -18,8 +18,8 @@ public class Card : MonoBehaviour
 
     private int value1;
     private int value2;
-    private ActionType actionType1;
-    private ActionType actionType2;
+    private Action action1;
+    private Action action2;
     public Button button;
     private Tween[] tweens = new Tween[3];
 
@@ -28,13 +28,9 @@ public class Card : MonoBehaviour
     {
         //Randomly Select 2 numbers between 0 & 4 (associated with index of acitons)
         int index = Random.Range(0, actions.Count);
-        Action action1 = actions[index];
+        action1 = actions[index];
         actions.RemoveAt(index);
-        Action action2 = actions[Random.Range(0, actions.Count)];
-
-        //assign types
-        actionType1 = action1.type;
-        actionType2 = action2.type;
+        action2 = actions[Random.Range(0, actions.Count)];
 
         //Use lower and upper to determine value1 and value2
         value1 = Random.Range(lower, upper);
