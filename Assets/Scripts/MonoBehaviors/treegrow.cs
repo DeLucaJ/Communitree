@@ -87,7 +87,7 @@ public class treegrow : MonoBehaviour
     public int min_points_to_branch = 6;
     public int max_children = 6;
     public int max_branch_depth = 3;
-    public int max_growth = 5;
+    public int growth = 5;
 
     [HideInInspector]
     public float min_x = 0;
@@ -105,13 +105,21 @@ public class treegrow : MonoBehaviour
     private int grows = 0;
     private int total_growth = 0;
     private float last_y = 0;
-    private int branch_interval = 8;
-    
+    private int branch_interval = 3;
+    private int grow_steps;
 
 
     // Tree Growth functions    
     public bool isAnimating() {
         return animating;
+    }
+
+    public bool isGrowing() {
+        return grow_steps < growth;
+    }
+
+    public void start_grow() {
+        grow_steps = 0;
     }
 
     private void grow(int degree) {
@@ -205,26 +213,25 @@ public class treegrow : MonoBehaviour
             animating = elapsedTime < grow_anim_time;
 
         } else {
-            if (total_growth < max_growth && grows <= branch_interval) {
+            if (grow_steps < growth && grows <= branch_interval) {
                 grow(1);
                 grows++;
                 total_growth++;
-                last_y = this.gameObject.transform.position.y;
+                grow_steps++;
             } else if (grows > branch_interval) {
                 int depth = branchInfo.Count;
                 depth = depth < max_branch_depth ? depth : max_branch_depth;
                 for (int i = depth - 1; i >= 0; --i) {
-                    for (int b = branchInfo[i].Count - 1; b >= 0; --b)
+                    for (int b = branchInfo[i].Count - 1; b >= 0; --b) {
+                        int tierMaxChildren = max_children / ((int)Mathf.Pow(2, i));
                         if (branchInfo[i][b].line.positionCount > min_points_to_branch &&
-                            branchInfo[i][b].children < max_children - b) 
+                            branchInfo[i][b].children < tierMaxChildren &&
+                            (tierMaxChildren - branchInfo[i][b].children) / ((float) tierMaxChildren) > Random.value)
                             addBranch(i, b);
+                    }
                 }
                 grows = 0;
             }
-        }
-
-        if (Input.GetKeyDown(KeyCode.B)) {
-            max_growth += 10;
         }
     }
 }

@@ -62,12 +62,14 @@ public class Card : MonoBehaviour
     }
 
     void Dispatch() {
+        if (gm.tg.isGrowing())
+            return;
         //send data to game manager
         gm.attributeScores[action1.name] += value1;
         gm.attributeScores[action2.name] += value2;
         //Debug.Log(action1.name + "\t: " + gm.attributeScores[action1.name].ToString());
         //Debug.Log(action2.name + "\t: " + gm.attributeScores[action2.name].ToString());
-
+        gm.tg.start_grow();
         //call ResetCards on parent
         CardDock dock = gameObject.GetComponentInParent<CardDock>();
         dock.ResetCards();

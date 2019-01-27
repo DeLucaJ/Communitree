@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public Action[] actions;
+    public treegrow tg;
     public int startingVal;
     //public Inhabitant[] inhabitants;
 
@@ -16,6 +17,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         FillDictionary();
+        tg.growth = startingVal;
+        tg.max_children = startingVal;
     }
 
     void FillDictionary() {
@@ -25,9 +28,33 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void handleBranch(Action act) {
+        tg.max_children = attributeScores[act.name];
+    }
+
+    private void handleFruit(Action act) {
+
+    }
+
+    private void handleHeight(Action act) {
+        tg.growth = attributeScores[act.name];
+    }
+
+    private void handleLeaf(Action act) {
+
+    }
+
     // Update is called once per frame
     void Update()
     {
-        
+        foreach(Action act in actions) {
+            switch(act.name) {
+                case "Branch": handleBranch(act);  break;
+                case "Fruit": handleFruit(act); break;
+                case "Height": handleHeight(act);  break;
+                case "Leaf": handleLeaf(act);  break;
+                default: break;
+            }
+        }
     }
 }
