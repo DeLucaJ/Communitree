@@ -19,6 +19,7 @@ public class treegrow : MonoBehaviour
         public Vector3 nextPoint;
         public float lastWidth;
         public float nextWidth;
+        public float growthNormalizer;
 
         public Branch(LineRenderer line) {
             length = 0.0f;
@@ -41,9 +42,10 @@ public class treegrow : MonoBehaviour
             this.nextPoint = this.lastPoint;
             this.lastWidth = line.widthMultiplier;
             this.nextWidth = this.lastWidth;
+            this.growthNormalizer = parent.growthNormalizer * scale;
         }
 
-        public void grow(int degree) {
+        public void grow(int degree, AnimationCurve growth_curve) {
             // Setup new vertex
             line.positionCount++;
             lastWidth = nextWidth = line.widthMultiplier;
@@ -58,10 +60,12 @@ public class treegrow : MonoBehaviour
             else
                 angleDir += Random.Range(-1.0f, 1.0f) * angle_var;
 
-            nextPoint.x += Mathf.Cos(Mathf.Deg2Rad * angleDir) * growth_step * degree;
-            nextPoint.y += Mathf.Sin(Mathf.Deg2Rad * angleDir) * growth_step * degree;
-            nextWidth += growth_step * degree / 20.0f;
-            length += growth_step * degree;
+            float scale = growth_step * degree * growth_curve.Evaluate(Mathf.Clamp(line.positionCount / growthNormalizer, 0.0f, 1.0f));
+
+            nextPoint.x += Mathf.Cos(Mathf.Deg2Rad * angleDir) * scale;
+            nextPoint.y += Mathf.Sin(Mathf.Deg2Rad * angleDir) * scale;
+            nextWidth += scale / 20.0f;
+            length += scale;
         }
 
         public void lerp(AnimationCurve anim_curve, float delta) {
@@ -73,21 +77,26 @@ public class treegrow : MonoBehaviour
     }
 
     public LineRenderer trunk;
+    public GameObject leaf_prefab;
+    public GameObject fruit_prefab;
     public GameObject branch_prefab;
 
     public float scale_factor = 0.7f;
     public float angle_variance = 10.0f;
     public float max_angle_range = 30.0f;
     public float growth_step = 1.0f;
+    public AnimationCurve growth_curve;
 
 
     public float grow_anim_time = 1.0f;
     public AnimationCurve grow_anim_curve;
 
     public int min_points_to_branch = 6;
-    public int max_children = 6;
     public int max_branch_depth = 3;
+    public int max_children = 6;    
     public int growth = 5;
+    public int leaf_factor = 1;
+    public int fruit_factor = 1;
 
     [HideInInspector]
     public float min_x = 0;
@@ -99,14 +108,17 @@ public class treegrow : MonoBehaviour
     public bool paused = false;
 
     // Trunk growth
+    private float trunk_veer = 1f;
     private List<List<Branch>> branchInfo;    
     private bool animating = false;
     private float elapsedTime;
     private int grows = 0;
     private int total_growth = 0;
-    private float last_y = 0;
     private int branch_interval = 3;
     private int grow_steps;
+    private float simplify_tolerance = 0.001f;
+    private bool grewLeaves = false;
+    private bool grewFruit = false;
 
 
     // Tree Growth functions    
@@ -115,11 +127,13 @@ public class treegrow : MonoBehaviour
     }
 
     public bool isGrowing() {
-        return grow_steps < growth;
+        return grow_steps < growth || isAnimating() || !grewFruit || !grewLeaves;
     }
 
     public void start_grow() {
         grow_steps = 0;
+        grewLeaves = false;
+        grewFruit = false;
     }
 
     private void grow(int degree) {
@@ -127,11 +141,14 @@ public class treegrow : MonoBehaviour
         elapsedTime = 0.0f;
         foreach (List<Branch> tiers in branchInfo) {
             foreach (Branch b in tiers) {
-                b.grow(degree);
+                b.grow(degree, growth_curve);
                 Vector2 point = b.line.GetPosition(b.line.positionCount - 1);
                 max_x = Mathf.Max(point.x, max_x);
                 min_x = Mathf.Min(point.x, min_x);
                 max_y = Mathf.Max(point.y, max_y);
+
+                if (b.branchFrom == -1)
+                    b.midAngle += trunk_veer;
             }
         }
     }    
@@ -139,7 +156,7 @@ public class treegrow : MonoBehaviour
     private void setLineParams(LineRenderer line) {
         line.material = trunk.material;
         line.numCornerVertices = trunk.numCornerVertices;
-        line.widthCurve = trunk.widthCurve;
+        line.widthCurve = trunk.widthCurve;        
         line.endColor  = trunk.endColor;
         line.startColor = trunk.startColor;
         line.useWorldSpace = false;        
@@ -173,6 +190,48 @@ public class treegrow : MonoBehaviour
         branchInfo[tier + 1].Add(branch);      
     }
 
+    private int leafCuttoff = 8;
+    private void growLeaves() {
+        float chance = leaf_factor / 100.0f + 0.15f;
+        float toLookAt = 0.1f + 0.1f * chance;
+        float scale = 1f;
+
+        foreach (List<Branch> tiers in branchInfo) {
+            foreach (Branch b in tiers) {
+                if (b.line.positionCount > leafCuttoff) {
+                    int count = 0;
+                    int max = (int) (b.line.positionCount * toLookAt) + 1;
+                    int pos = b.line.positionCount;
+                    float delay = 0;
+                    while (count < max) {
+                        pos--;
+                        count++;
+                        if (chance > Random.value) {
+                            GameObject go = Instantiate(leaf_prefab);
+                            go.transform.SetParent(this.gameObject.transform);
+                            go.transform.localPosition = b.line.GetPosition(pos);
+                            float angle = b.midAngle - 90.0f;
+                            angle += Random.Range(-90.0f, 90.0f) * scale;
+                            go.transform.Rotate(new Vector3(0, 0, angle));
+                            Tween twn = go.GetComponent<Tween>();
+                            twn.delay = delay;
+                            delay += 0.05f;
+                            twn.startVector = Vector3.zero;
+                            twn.endVector = Vector3.one;
+                            twn.type = Tween.TweenType.Scale;
+                            twn.Animate();
+                            if (chance > Random.value) {
+                                pos++;
+                                count--;
+                            }
+                        }
+                    }
+                }
+            }
+            scale *= scale_factor;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -193,8 +252,10 @@ public class treegrow : MonoBehaviour
         data.nextPoint = data.lastPoint;
         data.lastWidth = trunk.widthMultiplier;
         data.nextWidth = data.lastWidth;
+        data.growthNormalizer = 100.0f;
 
         branchInfo[0].Add(data);
+        trunk_veer *= Random.value > 0.5f ? -1 : 1;
     }
 
     // Update is called once per frame
@@ -203,19 +264,19 @@ public class treegrow : MonoBehaviour
         if (paused)
             return;
 
-
         if (animating) {
             elapsedTime += Time.deltaTime;
             float delta = elapsedTime / grow_anim_time;
+            animating = elapsedTime < grow_anim_time;
             foreach (List<Branch> tiers in branchInfo) {
                 foreach(Branch b in tiers) {
                     b.lerp(grow_anim_curve, delta);
+                    if (!animating) b.line.Simplify(simplify_tolerance);
                 }
-            }
-            animating = elapsedTime < grow_anim_time;
+            }            
 
-        } else {
-            if (grow_steps < growth && grows <= branch_interval) {
+        } else if (grow_steps < growth) {
+            if ( grows <= branch_interval) {
                 grow(1);
                 grows++;
                 total_growth++;
@@ -234,6 +295,12 @@ public class treegrow : MonoBehaviour
                 }
                 grows = 0;
             }
+        } else if (!grewLeaves) {
+            growLeaves();
+            grewLeaves = true;
+
+        } else if (!grewFruit) {
+            grewFruit = true;
         }
     }
 }

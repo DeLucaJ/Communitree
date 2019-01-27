@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
         FillDictionary();
         tg.growth = startingVal;
         tg.max_children = startingVal;
+        tg.leaf_factor = startingVal;
+        tg.fruit_factor = startingVal;
     }
 
     void FillDictionary() {
@@ -33,7 +35,7 @@ public class GameManager : MonoBehaviour
     }
 
     private void handleFruit(Action act) {
-
+        tg.fruit_factor = attributeScores[act.name];
     }
 
     private void handleHeight(Action act) {
@@ -41,7 +43,7 @@ public class GameManager : MonoBehaviour
     }
 
     private void handleLeaf(Action act) {
-
+        tg.leaf_factor = attributeScores[act.name];
     }
 
     // Update is called once per frame
