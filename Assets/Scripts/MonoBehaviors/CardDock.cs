@@ -25,7 +25,7 @@ public class CardDock : MonoBehaviour
         for (int i = 0; i < howMany; i++) {
             vals[i] = UnityEngine.Random.Range(lowerDelay, upperDelay);
         }
-        
+
         Array.Sort(vals);
         return vals;
     }

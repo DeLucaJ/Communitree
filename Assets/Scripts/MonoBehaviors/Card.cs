@@ -22,10 +22,13 @@ public class Card : MonoBehaviour
     private Action action2;
     public Button button;
     private Tween[] tweens = new Tween[3];
+    private GameManager gm;
 
     // Start is called before the first frame update
     void Start()
     {
+        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+
         //Randomly Select 2 numbers between 0 & 4 (associated with index of acitons)
         int index = Random.Range(0, actions.Count);
         action1 = actions[index];
@@ -64,6 +67,10 @@ public class Card : MonoBehaviour
 
     void Dispatch() {
         //send data to game manager
+        gm.attributeScores[action1.name] += value1;
+        gm.attributeScores[action2.name] += value2;
+        Debug.Log(action1.name + "\t: " + gm.attributeScores[action1.name].ToString());
+        Debug.Log(action2.name + "\t: " + gm.attributeScores[action2.name].ToString());
 
         //call ResetCards on parent
         CardDock dock = gameObject.GetComponentInParent<CardDock>();
