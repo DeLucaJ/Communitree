@@ -7,6 +7,7 @@ public class InhabitantController : MonoBehaviour
     public Inhabitant type;
     
     private SpriteRenderer sr;
+    private treegrow tg;
 
     private void ApplyData() 
     {
@@ -19,6 +20,7 @@ public class InhabitantController : MonoBehaviour
     void Start()
     {
         ApplyData();
+        SelectBranch();
     }
 
     // Update is called once per frame
