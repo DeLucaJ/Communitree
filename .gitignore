@@ -39,3 +39,9 @@ sysinfo.txt
 Assets/_Scenes/mitch*
 Assets/_Scenes/megan*
 Assets/_Scenes/joe*
+
+# FMOD Integration
+/Assets/FMODStudioCache.asset
+/Assets/FMODStudioCache.asset.meta
+fmod.log
+fmod_editor.log
