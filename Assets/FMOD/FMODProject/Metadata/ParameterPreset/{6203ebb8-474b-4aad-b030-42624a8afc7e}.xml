@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="ParameterPreset" id="{6203ebb8-474b-4aad-b030-42624a8afc7e}">
+        <property name="name">
+            <value>Branchies</value>
+        </property>
+        <relationship name="folder">
+            <destination>{89402169-d6ed-4d93-afea-55ba294d992e}</destination>
+        </relationship>
+        <relationship name="parameter">
+            <destination>{f34b1c9c-c71a-4ae1-ba97-7d472229d6e6}</destination>
+        </relationship>
+    </object>
+    <object class="GameParameter" id="{f34b1c9c-c71a-4ae1-ba97-7d472229d6e6}">
+        <property name="initialValue">
+            <value>0</value>
+        </property>
+    </object>
+</objects>
