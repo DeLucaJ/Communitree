@@ -231,8 +231,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d56b8f7ffb79bdd81806895c7caa3ee9, type: 2}
   - {fileID: 11400000, guid: a37e963b9764cc80aa7f61432b6f54c0, type: 2}
   lower: -1
-  upper: 6
-  sum: 5
+  upper: 4
+  sum: 3
   imageLocs: 0200000005000000
   button: {fileID: 455270499529062641}
 --- !u!114 &5344764732274325498

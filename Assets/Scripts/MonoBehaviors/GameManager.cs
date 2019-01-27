@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public Action[] actions;
+    public int startingVal;
     //public Inhabitant[] inhabitants;
 
     [NonSerialized]
@@ -20,7 +21,7 @@ public class GameManager : MonoBehaviour
     void FillDictionary() {
         //fill dictionary
         for (int i = 0; i < actions.Length; i++){
-            attributeScores.Add(actions[i].name, 0);
+            attributeScores.Add(actions[i].name, startingVal);
         }
     }
 
