@@ -334,9 +334,9 @@ MonoBehaviour:
   slotPrefab: {fileID: 4265294154752461959, guid: 86587b2bc3c627e52852705916f9096b,
     type: 3}
   actions:
+  - {fileID: 11400000, guid: a37e963b9764cc80aa7f61432b6f54c0, type: 2}
   - {fileID: 11400000, guid: 2c9c27e68087913c6b0a7d9524438429, type: 2}
   - {fileID: 11400000, guid: 4eae9f5e405e91b9687c6997e3f46c89, type: 2}
-  - {fileID: 11400000, guid: a37e963b9764cc80aa7f61432b6f54c0, type: 2}
   - {fileID: 11400000, guid: d56b8f7ffb79bdd81806895c7caa3ee9, type: 2}
   startPos: {x: 10, y: 370}
   increment: -40
