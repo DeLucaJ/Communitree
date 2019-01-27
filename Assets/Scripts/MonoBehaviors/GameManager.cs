@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public Action[] actions;
+    public Inhabitant[] inhabitants;
     public treegrow tg;
     public int startingVal;
     //public Inhabitant[] inhabitants;

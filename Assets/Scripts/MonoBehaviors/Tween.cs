@@ -6,15 +6,17 @@ public class Tween : MonoBehaviour
 {
     public enum TweenType { Position, Rotation, Scale };
 
+    //flags
     public bool atStart;
+    public bool relative;
+    public bool looping;
+
     public AnimationCurve curve;
     public float animTime;
     public Vector3 startVector;
     public Vector3 endVector;
     public TweenType type;
     public float delay = 0.0f;
-
-    public bool relative;
 
 
     //private anim variables
@@ -28,16 +30,16 @@ public class Tween : MonoBehaviour
 
         switch(type){
             case TweenType.Position:
-                gameObject.transform.localPosition = startVector = relative ? gameObject.transform.localPosition + startVector : startVector;
                 endVector = relative ? gameObject.transform.localPosition + endVector : endVector;
+                gameObject.transform.localPosition = startVector = relative ? gameObject.transform.localPosition + startVector : startVector;
                 break;
             case TweenType.Rotation:
-                gameObject.transform.localRotation = relative ? Quaternion.Euler(startVector = gameObject.transform.localRotation.eulerAngles + startVector) : Quaternion.Euler(startVector);
                 endVector = relative ? gameObject.transform.localRotation.eulerAngles + endVector : endVector;
+                gameObject.transform.localRotation = relative ? Quaternion.Euler(startVector = gameObject.transform.localRotation.eulerAngles + startVector) : Quaternion.Euler(startVector);
                 break;
             case TweenType.Scale:
-                gameObject.transform.localScale = startVector = relative ? gameObject.transform.localScale + startVector : startVector;
                 endVector = relative ? gameObject.transform.localScale + endVector : endVector;
+                gameObject.transform.localScale = startVector = relative ? gameObject.transform.localScale + startVector : startVector;
                 break;
             default:
                 break;
@@ -87,6 +89,9 @@ public class Tween : MonoBehaviour
 
                 animating = delta < 1.0f;
             }
+        }
+        else if (looping) {
+            Animate();
         }
     }
 }

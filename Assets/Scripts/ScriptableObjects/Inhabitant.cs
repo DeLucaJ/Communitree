@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Inhabitant", menuName = "Inhabitant")]
-public class Inhabitants : ScriptableObject
+public class Inhabitant : ScriptableObject
 {
     public Sprite sprite;
     public Color color;
