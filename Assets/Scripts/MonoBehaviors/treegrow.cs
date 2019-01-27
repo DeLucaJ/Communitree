@@ -15,8 +15,8 @@ public class treegrow : MonoBehaviour
         public float angle_var;
         public float max_angle_range;
         public float angleDir;
-        public Vector2 lastPoint;
-        public Vector2 nextPoint;
+        public Vector3 lastPoint;
+        public Vector3 nextPoint;
         public float lastWidth;
         public float nextWidth;
 
@@ -67,7 +67,7 @@ public class treegrow : MonoBehaviour
         public void lerp(AnimationCurve anim_curve, float delta) {
             delta = delta > 1 ? 1 : delta;
             float alpha = anim_curve.Evaluate(delta);
-            line.SetPosition(line.positionCount - 1, Vector2.LerpUnclamped(lastPoint, nextPoint, alpha));
+            line.SetPosition(line.positionCount - 1, Vector3.LerpUnclamped(lastPoint, nextPoint, alpha));
             line.widthMultiplier = Mathf.LerpUnclamped(lastWidth, nextWidth, alpha);
         }
     }
@@ -85,8 +85,18 @@ public class treegrow : MonoBehaviour
     public AnimationCurve grow_anim_curve;
 
     public int min_points_to_branch = 6;
-    public int max_children = 4;
+    public int max_children = 6;
     public int max_branch_depth = 3;
+    public int max_growth = 5;
+
+    [HideInInspector]
+    public float min_x = 0;
+    [HideInInspector]
+    public float max_x = 0;
+    [HideInInspector]
+    public float max_y = 0;
+    [HideInInspector]
+    public bool paused = false;
 
     // Trunk growth
     private List<List<Branch>> branchInfo;    
@@ -94,8 +104,8 @@ public class treegrow : MonoBehaviour
     private float elapsedTime;
     private int grows = 0;
     private int total_growth = 0;
-    private int max_growth = 35;
-    private int branch_interval = 11;
+    private float last_y = 0;
+    private int branch_interval = 8;
     
 
 
@@ -110,6 +120,10 @@ public class treegrow : MonoBehaviour
         foreach (List<Branch> tiers in branchInfo) {
             foreach (Branch b in tiers) {
                 b.grow(degree);
+                Vector2 point = b.line.GetPosition(b.line.positionCount - 1);
+                max_x = Mathf.Max(point.x, max_x);
+                min_x = Mathf.Min(point.x, min_x);
+                max_y = Mathf.Max(point.y, max_y);
             }
         }
     }    
@@ -130,11 +144,12 @@ public class treegrow : MonoBehaviour
         GameObject go = Instantiate(branch_prefab);
         go.transform.SetParent(this.gameObject.transform);
         go.transform.localPosition = Vector3.zero;
+        go.transform.localScale = Vector3.one;
 
         LineRenderer line = go.GetComponent<LineRenderer>();
         setLineParams(line);
         line.widthMultiplier = parent.line.widthMultiplier * trunk.widthCurve.Evaluate(1.0f - dist / parent.length);
-        line.SetPosition(0, parent.line.GetPosition(pos));
+        line.SetPosition(0, parent.line.GetPosition(pos));        
 
         float angle = Random.Range(2.5f * parent.max_angle_range, 3f * parent.max_angle_range);
         angle *= parent.children % 2 == 0 ? 1 : -1;
@@ -175,6 +190,10 @@ public class treegrow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (paused)
+            return;
+
+
         if (animating) {
             elapsedTime += Time.deltaTime;
             float delta = elapsedTime / grow_anim_time;
@@ -184,19 +203,20 @@ public class treegrow : MonoBehaviour
                 }
             }
             animating = elapsedTime < grow_anim_time;
+
         } else {
             if (total_growth < max_growth && grows <= branch_interval) {
                 grow(1);
                 grows++;
                 total_growth++;
-
+                last_y = this.gameObject.transform.position.y;
             } else if (grows > branch_interval) {
                 int depth = branchInfo.Count;
                 depth = depth < max_branch_depth ? depth : max_branch_depth;
                 for (int i = depth - 1; i >= 0; --i) {
                     for (int b = branchInfo[i].Count - 1; b >= 0; --b)
                         if (branchInfo[i][b].line.positionCount > min_points_to_branch &&
-                            branchInfo[i][b].children < max_children) 
+                            branchInfo[i][b].children < max_children - b) 
                             addBranch(i, b);
                 }
                 grows = 0;
