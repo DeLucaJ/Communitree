@@ -15,3 +15,4 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 8189f7bf62d051894a9cc9ae45c60e22, type: 3}
   color: {r: 1, g: 0, b: 0, a: 1}
   preference: {fileID: 11400000, guid: 2c9c27e68087913c6b0a7d9524438429, type: 2}
+  perA: 0.5

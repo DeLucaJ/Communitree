@@ -119,6 +119,7 @@ public class treegrow : MonoBehaviour
     private float simplify_tolerance = 0.001f;
     private int leaves = 0;
     private int fruits = 0;
+    private int branches = 1; //Start w/ Trunk
     private bool grewLeaves = false;
     private bool grewFruit = false;
 
@@ -130,6 +131,14 @@ public class treegrow : MonoBehaviour
 
     public int fruitCount() {
         return fruits;
+    }
+
+    public int branchCount() {
+        return branches;
+    }
+
+    public int getHeight() {
+        return branchInfo[0][0].line.positionCount;
     }
 
     public bool isAnimating() {
@@ -197,7 +206,9 @@ public class treegrow : MonoBehaviour
 
         if (branchInfo.Count == tier + 1)
             branchInfo.Add(new List<Branch>());
-        branchInfo[tier + 1].Add(branch);      
+        branchInfo[tier + 1].Add(branch);
+
+        branches++;      
     }
 
     private int leafCuttoff = 8;

@@ -8,4 +8,5 @@ public class Inhabitant : ScriptableObject
     public Sprite sprite;
     public Color color;
     public Action preference;
+    public float perA;
 }

@@ -48,4 +48,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4eae9f5e405e91b9687c6997e3f46c89, type: 2}
   - {fileID: 11400000, guid: a37e963b9764cc80aa7f61432b6f54c0, type: 2}
   - {fileID: 11400000, guid: d56b8f7ffb79bdd81806895c7caa3ee9, type: 2}
-  startingVal: 3
+  inhabitants:
+  - {fileID: 11400000, guid: e3b916f8dfe2cb033883296cb6375dea, type: 2}
+  - {fileID: 11400000, guid: 35eb6a739446a78239fe12b52d5a1368, type: 2}
+  - {fileID: 11400000, guid: 193377d4738b72e218fa0c96e12301f7, type: 2}
+  tg: {fileID: 0}
+  startingVal: 5
+  inhabitantPrefab: {fileID: 7736953630756355308, guid: 729e9294da2d4aeb39eb4ceaaf1ef0ae,
+    type: 3}
+  instancePoint: {x: 0, y: -3, z: 0}
+  spawnPoint: {x: 0, y: 10, z: 0}
+  spawnDelay: 0.25

@@ -26,4 +26,9 @@ public class InhabitantController : MonoBehaviour
     {
         
     }
+
+    void FixedUpdate()
+    {
+        transform.Translate(Vector3.up * Time.deltaTime);
+    }
 }
