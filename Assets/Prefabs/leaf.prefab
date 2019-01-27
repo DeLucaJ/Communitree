@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 1023096761488428952}
   - component: {fileID: 1023096761488428953}
   - component: {fileID: 1023096761488428959}
-  m_Layer: 0
+  - component: {fileID: 8902680387786546117}
+  m_Layer: 8
   m_Name: leaf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,3 +142,19 @@ MonoBehaviour:
   type: 2
   delay: 0
   relative: 0
+--- !u!70 &8902680387786546117
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1023096761488428954}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0050251484, y: 1.28}
+  m_Size: {x: 1.3640327, y: 2.56}
+  m_Direction: 0
