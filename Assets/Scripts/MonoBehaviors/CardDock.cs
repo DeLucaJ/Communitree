@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CardDock : MonoBehaviour
 {
@@ -11,12 +12,14 @@ public class CardDock : MonoBehaviour
     public float lowerDelay;
     public float upperDelay;
     public float deathDelay;
+    public int cardLimit;
 
     private GameObject[] cards = new GameObject[3];
     private bool resetting = false;
     private float elapsedTime = 0.0f;
     private float spawnDelay;
-
+    private int usedCards = 0;
+    private Text cardsLeft;
     
     private float[] SortedRandomDelays(int howMany)
     {
@@ -32,14 +35,17 @@ public class CardDock : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        cardsLeft = GetComponentInChildren<Text>();
+
         CreateCards();
+        UpdateCardsLeft();
         spawnDelay = deathDelay + upperDelay + cards[1].GetComponent<Tween>().animTime;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (resetting) {
+        if (resetting && usedCards < cardLimit) {
             elapsedTime += Time.deltaTime;
 
             if(elapsedTime > spawnDelay) {
@@ -48,6 +54,10 @@ public class CardDock : MonoBehaviour
                 resetting = false;
             }
         }
+    }
+
+    private void UpdateCardsLeft(){
+        cardsLeft.text = (cardLimit - usedCards).ToString();
     }
 
     void CreateCards()
@@ -74,8 +84,8 @@ public class CardDock : MonoBehaviour
             t.Animate();
             Destroy(cards[i], delay + t.animTime);
         }
-
-        //CreateCards();
+        usedCards++;
         resetting = true;
+        UpdateCardsLeft();
     }
 }
