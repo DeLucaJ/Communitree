@@ -140,6 +140,8 @@ public class treegrow : MonoBehaviour
         line.material = trunk.material;
         line.numCornerVertices = trunk.numCornerVertices;
         line.widthCurve = trunk.widthCurve;
+        line.endColor  = trunk.endColor;
+        line.startColor = trunk.startColor;
         line.useWorldSpace = false;        
     }
 
