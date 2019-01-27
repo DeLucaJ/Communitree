@@ -9,7 +9,10 @@ public class GameManager : MonoBehaviour
     public Inhabitant[] inhabitants;
     public treegrow tg;
     public int startingVal;
-    //public Inhabitant[] inhabitants;
+
+    //public float IPA; //inhabitants per Attribute
+    //public float IPH; //inhabitants per Height
+    
 
     [HideInInspector]
     public Dictionary<string, int> attributeScores = new Dictionary<string, int>();
@@ -21,10 +24,14 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         FillDictionaries();
-        tg.growth = startingVal;
-        tg.max_children = startingVal;
-        tg.leaf_factor = startingVal;
-        tg.fruit_factor = startingVal;
+        SetTreeVals();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        UpdateActions();
+        UpdateInhabitants();
     }
 
     void FillDictionaries() {
@@ -37,6 +44,14 @@ public class GameManager : MonoBehaviour
         foreach (Inhabitant inhab in inhabitants) {
             inhabitantScores.Add(inhab.name, 0);
         }
+    }
+
+    private void SetTreeVals()
+    {
+        tg.growth = startingVal;
+        tg.max_children = startingVal;
+        tg.leaf_factor = startingVal;
+        tg.fruit_factor = startingVal;
     }
 
     private void UpdateActions()
@@ -54,7 +69,10 @@ public class GameManager : MonoBehaviour
 
     private void UpdateInhabitants()
     {
-        
+        foreach(Inhabitant inhab in inhabitants) {
+            int current = attributeScores[inhab.preference.name];
+            
+        }
     }
 
     private void handleBranch(Action act) {
@@ -71,12 +89,5 @@ public class GameManager : MonoBehaviour
 
     private void handleLeaf(Action act) {
         tg.leaf_factor = attributeScores[act.name];
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        UpdateActions();
-        UpdateInhabitants();
     }
 }
