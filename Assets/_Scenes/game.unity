@@ -122,8 +122,8 @@ GameObject:
   m_Component:
   - component: {fileID: 40556605}
   - component: {fileID: 40556604}
-  - component: {fileID: 40556603}
   - component: {fileID: 40556606}
+  - component: {fileID: 40556603}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -131,14 +131,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &40556603
-AudioListener:
+--- !u!114 &40556603
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 40556602}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ListenerNumber: 0
 --- !u!20 &40556604
 Camera:
   m_ObjectHideFlags: 0
@@ -854,6 +859,43 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1117644897}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1573986624 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3098741239991710829, guid: b621239a555698a4b86a18c10dc757f5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1649764115}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1573986626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1573986624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: event:/GrowTier2/BGMBase2
+  PlayEvent: 1
+  StopEvent: 0
+  CollisionTag: 
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params:
+  - Name: Heighties
+    Value: 1
+  - Name: Leafies
+    Value: 1
+  - Name: Fruities
+    Value: 1
+  - Name: Branchies
+    Value: 1
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 0
 --- !u!1 &1581889891
 GameObject:
   m_ObjectHideFlags: 0
@@ -1177,7 +1219,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1649764115}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1573986624}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27f683f10692e9945af112f39d9cf262, type: 3}

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{ffb45bb7-a93d-402d-add0-3a99f3fc03b7}">
+        <property name="assetPath">
+            <value>backbone2.wav</value>
+        </property>
+        <property name="isStreaming">
+            <value>true</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>52.071428571428569</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{f053f882-82e0-4615-8998-d8263d60a3aa}</destination>
+        </relationship>
+    </object>
+</objects>
