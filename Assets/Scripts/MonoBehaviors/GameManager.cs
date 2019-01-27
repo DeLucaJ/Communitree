@@ -11,24 +11,50 @@ public class GameManager : MonoBehaviour
     public int startingVal;
     //public Inhabitant[] inhabitants;
 
-    [NonSerialized]
+    [HideInInspector]
     public Dictionary<string, int> attributeScores = new Dictionary<string, int>();
+
+    [HideInInspector]
+    public Dictionary<string, int> inhabitantScores = new Dictionary<string, int>();
 
     // Start is called before the first frame update
     void Start()
     {
-        FillDictionary();
+        FillDictionaries();
         tg.growth = startingVal;
         tg.max_children = startingVal;
         tg.leaf_factor = startingVal;
         tg.fruit_factor = startingVal;
     }
 
-    void FillDictionary() {
-        //fill dictionary
-        for (int i = 0; i < actions.Length; i++){
-            attributeScores.Add(actions[i].name, startingVal);
+    void FillDictionaries() {
+        //fill action dictionary
+        foreach (Action act in actions) {
+            attributeScores.Add(act.name, startingVal);
         }
+
+        //fill inhabitant dictionary
+        foreach (Inhabitant inhab in inhabitants) {
+            inhabitantScores.Add(inhab.name, 0);
+        }
+    }
+
+    private void UpdateActions()
+    {
+        foreach(Action act in actions) {
+            switch(act.name) {
+                case "Branch": handleBranch(act);  break;
+                case "Fruit": handleFruit(act); break;
+                case "Height": handleHeight(act);  break;
+                case "Leaf": handleLeaf(act);  break;
+                default: break;
+            }
+        }
+    }
+
+    private void UpdateInhabitants()
+    {
+        
     }
 
     private void handleBranch(Action act) {
@@ -50,14 +76,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        foreach(Action act in actions) {
-            switch(act.name) {
-                case "Branch": handleBranch(act);  break;
-                case "Fruit": handleFruit(act); break;
-                case "Height": handleHeight(act);  break;
-                case "Leaf": handleLeaf(act);  break;
-                default: break;
-            }
-        }
+        UpdateActions();
+        UpdateInhabitants();
     }
 }
