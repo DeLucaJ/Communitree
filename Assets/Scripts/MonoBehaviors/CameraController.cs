@@ -12,7 +12,7 @@ public class CameraController : MonoBehaviour
 
     private Camera camera;
     private float elapsedTime;
-    private bool animating;
+    public bool animating;  // Public to scale bkg gradient
     private Vector3 old_pos;
     private Vector3 target_pos;
     private float old_size;
