@@ -8,6 +8,7 @@ public class Card : MonoBehaviour
     public List<Action> actions;
     public int lower;
     public int upper;
+    public int sum;
 
     public int[] imageLocs;
 
@@ -19,6 +20,8 @@ public class Card : MonoBehaviour
     private int value2;
     private ActionType actionType1;
     private ActionType actionType2;
+    public Button button;
+    private Tween[] tweens = new Tween[3];
 
     // Start is called before the first frame update
     void Start()
@@ -35,7 +38,11 @@ public class Card : MonoBehaviour
 
         //Use lower and upper to determine value1 and value2
         value1 = Random.Range(lower, upper);
-        value2 = (upper + lower) - value1;
+
+        if (value1 == 0) value1++;
+        else if (value1 == sum) value1--;
+        
+        value2 = sum - value1;
 
         //Find and assign Images and Text in children
         images = GetComponentsInChildren<Image>();
@@ -48,6 +55,23 @@ public class Card : MonoBehaviour
 
         texts[0].text = value1.ToString();
         texts[1].text = value2.ToString();
+
+        //Assign Button & Function
+        //button = gameObject.GetComponent<button>();
+        button.onClick.AddListener(Dispatch);
+
+        //find tweens
+        //0 = Create
+        //1 = Death
+        tweens = GetComponents<Tween>();
+    }
+
+    void Dispatch() {
+        //send data to game manager
+
+        //call ResetCards on parent
+        CardDock dock = gameObject.GetComponentInParent<CardDock>();
+        dock.ResetCards();
     }
 
     // Update is called once per frame

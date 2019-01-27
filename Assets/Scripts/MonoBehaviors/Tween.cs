@@ -12,6 +12,10 @@ public class Tween : MonoBehaviour
     public Vector3 startVector;
     public Vector3 endVector;
     public TweenType type;
+    public float delay = 0.0f;
+
+    public bool relative;
+
 
     //private anim variables
     private bool animating = false;
@@ -21,9 +25,26 @@ public class Tween : MonoBehaviour
     void Start()
     {
         if (atStart) Animate();
+
+        switch(type){
+            case TweenType.Position:
+                gameObject.transform.localPosition = startVector = relative ? gameObject.transform.localPosition + startVector : startVector;
+                endVector = relative ? gameObject.transform.localPosition + endVector : endVector;
+                break;
+            case TweenType.Rotation:
+                gameObject.transform.localRotation = relative ? Quaternion.Euler(startVector = gameObject.transform.localRotation.eulerAngles + startVector) : Quaternion.Euler(startVector);
+                endVector = relative ? gameObject.transform.localRotation.eulerAngles + endVector : endVector;
+                break;
+            case TweenType.Scale:
+                gameObject.transform.localScale = startVector = relative ? gameObject.transform.localScale + startVector : startVector;
+                endVector = relative ? gameObject.transform.localScale + endVector : endVector;
+                break;
+            default:
+                break;
+        }
     }
 
-    void Animate()
+    public void Animate()
     {
         animating = true;
         elapsedTime = 0.0f; 
@@ -35,23 +56,37 @@ public class Tween : MonoBehaviour
 
         if (animating) {
             elapsedTime += Time.deltaTime;
-            float delta = elapsedTime / animTime;
             
-            switch(type){
-                case TweenType.Position:
-                    gameObject.transform.localPosition= Vector3.LerpUnclamped(startVector, endVector, curve.Evaluate(delta));
-                    break;
-                case TweenType.Rotation:
-                    gameObject.transform.localRotation= Quaternion.Euler(Vector3.LerpUnclamped(startVector, endVector, curve.Evaluate(delta)));
-                    break;
-                case TweenType.Scale:
-                    gameObject.transform.localScale= Vector3.LerpUnclamped(startVector, endVector, curve.Evaluate(delta));
-                    break;
-                default:
-                    break;
+            if (elapsedTime >= delay) {
+                float delta = (elapsedTime - delay) / (animTime);
+
+                switch(type){
+                    case TweenType.Position:
+                        gameObject.transform.localPosition= Vector3.LerpUnclamped(
+                            startVector, 
+                            endVector, 
+                            curve.Evaluate(delta)
+                            );
+                        break;
+                    case TweenType.Rotation:
+                        gameObject.transform.localRotation= Quaternion.Euler(Vector3.LerpUnclamped(
+                            startVector, 
+                            endVector, 
+                            curve.Evaluate(delta)
+                            ));
+                        break;
+                    case TweenType.Scale:
+                        gameObject.transform.localScale= Vector3.LerpUnclamped(
+                            startVector, 
+                            endVector, 
+                            curve.Evaluate(delta));
+                        break;
+                    default:
+                        break;
+                }
+
+                animating = delta < 1.0f;
             }
-            
-            animating = delta < 1.0f;
         }
     }
 }
