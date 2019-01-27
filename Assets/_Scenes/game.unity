@@ -210,7 +210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tg: {fileID: 1709803676}
-  buffer_scale: 0.9
+  buffer_scale: 0.8
   anim_curve:
     serializedVersion: 2
     m_Curve:
@@ -1015,7 +1015,7 @@ PrefabInstance:
     - target: {fileID: 3098741239991710831, guid: b621239a555698a4b86a18c10dc757f5,
         type: 3}
       propertyPath: growth_step
-      value: 0.75
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3098741239991710831, guid: b621239a555698a4b86a18c10dc757f5,
         type: 3}
@@ -1154,6 +1154,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2888568600460927242, guid: 2fd4ac4a10be91b429e2bac55228e3dd,
         type: 3}
+    - target: {fileID: 3098741239991710831, guid: b621239a555698a4b86a18c10dc757f5,
+        type: 3}
+      propertyPath: max_angle_range
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3098741239991710831, guid: b621239a555698a4b86a18c10dc757f5,
+        type: 3}
+      propertyPath: angle_variance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3098741239991710831, guid: b621239a555698a4b86a18c10dc757f5,
+        type: 3}
+      propertyPath: scale_factor
+      value: 0.85
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b621239a555698a4b86a18c10dc757f5, type: 3}
 --- !u!114 &1709803676 stripped

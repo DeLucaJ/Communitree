@@ -117,11 +117,21 @@ public class treegrow : MonoBehaviour
     private int branch_interval = 3;
     private int grow_steps;
     private float simplify_tolerance = 0.001f;
+    private int leaves = 0;
+    private int fruits = 0;
     private bool grewLeaves = false;
     private bool grewFruit = false;
 
 
     // Tree Growth functions    
+    public int leafCount() {
+        return leaves;
+    }
+
+    public int fruitCount() {
+        return fruits;
+    }
+
     public bool isAnimating() {
         return animating;
     }
@@ -192,9 +202,9 @@ public class treegrow : MonoBehaviour
 
     private int leafCuttoff = 8;
     private void growLeaves() {
-        float chance = leaf_factor / 100.0f + 0.15f;
+        float chance = leaf_factor / 100.0f + 0.05f;
         float toLookAt = 0.1f + 0.1f * chance;
-        float scale = 1f;
+        float scale = 0.9f;
 
         foreach (List<Branch> tiers in branchInfo) {
             foreach (Branch b in tiers) {
@@ -207,6 +217,7 @@ public class treegrow : MonoBehaviour
                         pos--;
                         count++;
                         if (chance > Random.value) {
+                            leaves++;
                             GameObject go = Instantiate(leaf_prefab);
                             go.transform.SetParent(this.gameObject.transform);
                             go.transform.localPosition = b.line.GetPosition(pos);
@@ -226,6 +237,46 @@ public class treegrow : MonoBehaviour
                             }
                         }
                     }
+                }
+            }
+            scale *= scale_factor;
+        }
+    }
+
+    private int fruitCuttoff = 10;
+    private void growFruit() {
+        float chance = fruit_factor / 100.0f + 0.05f;
+        float toLookAt = 0.1f + 0.1f * chance;
+        float scale = 1.0f;
+        float delay = 0;
+
+        foreach (List<Branch> tiers in branchInfo) {
+            foreach (Branch b in tiers) {
+                if (b.line.positionCount > fruitCuttoff) {
+                    bool done = false;
+                    int pos = b.line.positionCount - Random.Range(7, 10);                 
+                    while (!done) {
+                        done = true;
+                        if (b.branchFrom != -1 && chance > Random.value) {
+                            fruits++;
+                            GameObject go = Instantiate(fruit_prefab);
+                            go.transform.SetParent(this.gameObject.transform);
+                            go.transform.localPosition = b.line.GetPosition(pos);
+                            go.transform.localPosition += new Vector3(Random.Range(-2.0f, 2.0f), Random.Range(-0.5f, 0.5f), 0) * scale;
+                            Tween[] tweens = go.GetComponents<Tween>();
+                            Tween twn = tweens[0];
+                            twn.delay = delay;
+                            tweens[1].delay = delay;
+                            delay += 0.08f;
+                            twn.startVector = Vector3.zero;
+                            twn.endVector = Vector3.one * scale;
+                            twn.type = Tween.TweenType.Scale;
+                            twn.Animate();
+                            if (chance > Random.value)
+                                done = false;
+                        }
+                    }
+                    
                 }
             }
             scale *= scale_factor;
@@ -300,6 +351,7 @@ public class treegrow : MonoBehaviour
             grewLeaves = true;
 
         } else if (!grewFruit) {
+            growFruit();
             grewFruit = true;
         }
     }

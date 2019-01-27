@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2888568600460927240}
   - component: {fileID: 2888568600460927243}
   - component: {fileID: 2888568600460927241}
+  - component: {fileID: 1396152910997093773}
   m_Layer: 0
   m_Name: fruit
   m_TagString: Untagged
@@ -68,7 +69,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 91ce790592ac84cdfb9e598994151b03, type: 3}
   m_Color: {r: 0.5471698, g: 0.04903879, b: 0.04903879, a: 1}
   m_FlipX: 0
@@ -93,6 +94,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   atStart: 0
+  relative: 0
+  looping: 0
   curve:
     serializedVersion: 2
     m_Curve:
@@ -122,4 +125,83 @@ MonoBehaviour:
   endVector: {x: 1, y: 1, z: 1}
   type: 2
   delay: 0
+--- !u!114 &1396152910997093773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2888568600460927242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8892ca94be5f42f4d851e276f89f138a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  atStart: 1
   relative: 0
+  looping: 0
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1.3779488
+      outSlope: 1.3779488
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.46153843
+    - serializedVersion: 3
+      time: 0.2
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.4
+      value: -1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.6
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.8
+      value: -1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 3.0064318
+      outSlope: 3.0064318
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.19819818
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  animTime: 0.6
+  startVector: {x: 0, y: 0, z: 0}
+  endVector: {x: 0, y: 0, z: 10}
+  type: 1
+  delay: 0
