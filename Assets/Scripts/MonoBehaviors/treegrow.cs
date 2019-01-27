@@ -141,6 +141,22 @@ public class treegrow : MonoBehaviour
         return branchInfo[0][0].line.positionCount;
     }
 
+    public List<Vector2> pathToBranch(int tier, int branch, int pos) {
+        Branch b = branchInfo[tier][branch];
+        List<Vector2> path = new List<Vector2>();
+        for (int p = 0; p < pos; p += 3) {
+            if (p > pos) p = pos;
+            path.Add(b.line.GetPosition(p));
+        }
+        if (tier == 0 && b.branchFrom == -1) {
+            return path;
+        } else {
+            List<Vector2> partialPath = pathToBranch(tier - 1, b.branchFrom, b.branchAt);
+            partialPath.AddRange(path);
+            return partialPath;
+        }
+    }
+
     public bool isAnimating() {
         return animating;
     }
