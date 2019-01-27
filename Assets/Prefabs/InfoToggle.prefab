@@ -255,6 +255,7 @@ GameObject:
   - component: {fileID: 6069696657265593768}
   - component: {fileID: 6069696657265593686}
   - component: {fileID: 6069696657265593687}
+  - component: {fileID: 5994319779732352578}
   m_Layer: 5
   m_Name: InfoDock
   m_TagString: Untagged
@@ -279,7 +280,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 140, y: 400}
+  m_SizeDelta: {x: 100, y: 400}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &6069696657265593686
 CanvasRenderer:
@@ -318,3 +319,24 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!114 &5994319779732352578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6069696657265593769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d97f4f8bebe06cf09750142fd23caa4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slotPrefab: {fileID: 4265294154752461959, guid: 86587b2bc3c627e52852705916f9096b,
+    type: 3}
+  actions:
+  - {fileID: 11400000, guid: 2c9c27e68087913c6b0a7d9524438429, type: 2}
+  - {fileID: 11400000, guid: 4eae9f5e405e91b9687c6997e3f46c89, type: 2}
+  - {fileID: 11400000, guid: a37e963b9764cc80aa7f61432b6f54c0, type: 2}
+  - {fileID: 11400000, guid: d56b8f7ffb79bdd81806895c7caa3ee9, type: 2}
+  startPos: {x: 10, y: 370}
+  increment: -40

@@ -36,11 +36,7 @@ public class Card : MonoBehaviour
         action2 = actions[Random.Range(0, actions.Count)];
 
         //Use lower and upper to determine value1 and value2
-        value1 = Random.Range(lower, upper);
-
-        if (value1 == 0) value1++;
-        else if (value1 == sum) value1--;
-        
+        value1 = Random.Range(lower, upper);        
         value2 = sum - value1;
 
         //Find and assign Images and Text in children
@@ -69,8 +65,8 @@ public class Card : MonoBehaviour
         //send data to game manager
         gm.attributeScores[action1.name] += value1;
         gm.attributeScores[action2.name] += value2;
-        Debug.Log(action1.name + "\t: " + gm.attributeScores[action1.name].ToString());
-        Debug.Log(action2.name + "\t: " + gm.attributeScores[action2.name].ToString());
+        //Debug.Log(action1.name + "\t: " + gm.attributeScores[action1.name].ToString());
+        //Debug.Log(action2.name + "\t: " + gm.attributeScores[action2.name].ToString());
 
         //call ResetCards on parent
         CardDock dock = gameObject.GetComponentInParent<CardDock>();
