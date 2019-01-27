@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New CInhabitant", menuName = "Inhabitant")]
+[CreateAssetMenu(fileName = "New Inhabitant", menuName = "Inhabitant")]
 public class Inhabitants : ScriptableObject
 {
     public Sprite sprite;
