@@ -17,6 +17,7 @@ public class CameraController : MonoBehaviour
     private Vector3 target_pos;
     private float old_size;
     private float target_size;
+    private int resizes = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -39,10 +40,11 @@ public class CameraController : MonoBehaviour
         }
         else if (tg.max_y > buffer_scale * cam_max_y) {
             old_pos = camera.transform.position;
-            target_pos = old_pos + new Vector3(0, camera.orthographicSize);
+            target_pos = old_pos + new Vector3(0, camera.orthographicSize) * .5f * Mathf.Pow(0.95f, resizes);
             old_size = camera.orthographicSize;
-            target_size = old_size * 2;
+            target_size = old_size * 1.5f * Mathf.Pow(0.95f, resizes);
 
+            //resizes++;
             elapsedTime = 0.0f;
             animating = true;
             tg.paused = animating;
