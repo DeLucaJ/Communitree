@@ -137,7 +137,7 @@ public class GameManager : MonoBehaviour
             ic.type = type;
 
             inhabitantsQueue.Enqueue(current);
-            Debug.Log(inhabitantsQueue.Count);
+            //Debug.Log(inhabitantsQueue.Count);
             inhabitantScores[type.name]++;
         }
     }

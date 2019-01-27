@@ -20,7 +20,7 @@ public class InhabitantController : MonoBehaviour
     void Start()
     {
         ApplyData();
-        SelectBranch();
+        //SelectBranch();
     }
 
     // Update is called once per frame
