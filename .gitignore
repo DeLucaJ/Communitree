@@ -43,5 +43,8 @@ Assets/_Scenes/joe*
 # FMOD Integration
 /Assets/FMODStudioCache.asset
 /Assets/FMODStudioCache.asset.meta
+/Assets/StreamingAssets*
+.*
+
 fmod.log
 fmod_editor.log
