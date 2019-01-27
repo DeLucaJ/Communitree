@@ -17,6 +17,18 @@ public class CardDock : MonoBehaviour
     private float elapsedTime = 0.0f;
     private float spawnDelay;
 
+    
+    private float[] SortedRandomDelays(int howMany)
+    {
+        float[] vals = new float[howMany];
+
+        for (int i = 0; i < howMany; i++) {
+            vals[i] = UnityEngine.Random.Range(lowerDelay, upperDelay);
+        }
+        
+        Array.Sort(vals);
+        return vals;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -39,20 +51,24 @@ public class CardDock : MonoBehaviour
     }
 
     void CreateCards()
-    {
+    {   
+        float[] delays = SortedRandomDelays(cards.Length);
         for (int i = 0; i < cards.Length; i++){
             cards[i] = Instantiate(cardPrefab, 
                 transform.position + new Vector3(cardPoints[i].x, cardPoints[i].y, 0), 
                 Quaternion.identity);
             cards[i].transform.SetParent(gameObject.transform);
-            if (randomDelay) cards[i].GetComponent<Tween>().delay = UnityEngine.Random.Range(lowerDelay, upperDelay);
+            if (randomDelay) {
+                cards[i].GetComponent<Tween>().delay = delays[i];
+            }
         }
     }
 
     public void ResetCards()
     {
+        float[] delays = SortedRandomDelays(cards.Length);
         for (int i = 0; i < cards.Length; i++) {
-            float delay = randomDelay ? deathDelay + UnityEngine.Random.Range(lowerDelay, upperDelay) : deathDelay;
+            float delay = randomDelay ? deathDelay + delays[i] : deathDelay;
             Tween t = cards[i].GetComponents<Tween>()[1];
             t.delay = delay;
             t.Animate();
