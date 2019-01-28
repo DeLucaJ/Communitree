@@ -104,6 +104,10 @@ public class GameManager : MonoBehaviour
 
             current.transform.position = spawnPoint;
 
+            InhabitantController ic = current.GetComponent<InhabitantController>();
+            ic.tg = tg;
+            ic.Go();           
+
             //animate
         
             elapsedTime = 0.0f;

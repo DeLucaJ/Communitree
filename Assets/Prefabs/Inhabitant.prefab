@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3540685033042353862}
   - component: {fileID: 1130619363520086509}
   - component: {fileID: 7736953630756355311}
+  - component: {fileID: 4118970362754182691}
   m_Layer: 0
   m_Name: Inhabitant
   m_TagString: Untagged
@@ -95,6 +96,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: {fileID: 11400000, guid: e3b916f8dfe2cb033883296cb6375dea, type: 2}
+  moveIndex: 2
+  tg: {fileID: 0}
 --- !u!114 &1130619363520086509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,4 +194,48 @@ MonoBehaviour:
   startVector: {x: 0, y: 0, z: 10}
   endVector: {x: 0, y: 0, z: -10}
   type: 1
+  delay: 0
+--- !u!114 &4118970362754182691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7736953630756355308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8892ca94be5f42f4d851e276f89f138a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  atStart: 0
+  relative: 0
+  looping: 0
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  animTime: 0.25
+  startVector: {x: 0, y: 0, z: 0}
+  endVector: {x: 0, y: 0, z: 0}
+  type: 0
   delay: 0

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Leafies
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 08a2a5b49fd0e7921817b8ba4cea82cd, type: 3}
-  color: {r: 0.588074, g: 0.7735849, b: 0.45977214, a: 1}
+  color: {r: 0.75300395, g: 0.8301887, b: 0.46991813, a: 1}
   preference: {fileID: 11400000, guid: d56b8f7ffb79bdd81806895c7caa3ee9, type: 2}
   perA: 0.5

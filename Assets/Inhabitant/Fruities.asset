@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Fruities
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: c3bbbaed8089658859cf24086f035b1f, type: 3}
-  color: {r: 0.8490566, g: 0.4165183, b: 0.4485793, a: 1}
+  color: {r: 1, g: 0.4716981, b: 0.69083256, a: 1}
   preference: {fileID: 11400000, guid: 4eae9f5e405e91b9687c6997e3f46c89, type: 2}
   perA: 0.5

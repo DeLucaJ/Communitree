@@ -94,4 +94,8 @@ public class Tween : MonoBehaviour
             Animate();
         }
     }
+
+    public bool IsAnimating() {
+        return animating;
+    }
 }
