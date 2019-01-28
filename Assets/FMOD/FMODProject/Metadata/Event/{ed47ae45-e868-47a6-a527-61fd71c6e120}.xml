@@ -54,6 +54,9 @@
         </relationship>
     </object>
     <object class="MasterTrack" id="{788e3465-79a1-481c-a62c-40846a2cbe51}">
+        <relationship name="automationTracks">
+            <destination>{2314e8e9-4d96-4d79-b806-3e509c47472e}</destination>
+        </relationship>
         <relationship name="mixerGroup">
             <destination>{d844c7b2-6172-4262-888e-732a836bfc9c}</destination>
         </relationship>
@@ -182,6 +185,9 @@
         </relationship>
     </object>
     <object class="EventMixerMaster" id="{d844c7b2-6172-4262-888e-732a836bfc9c}">
+        <relationship name="automators">
+            <destination>{b69e025e-c970-4bd5-857c-745fd305c711}</destination>
+        </relationship>
         <relationship name="effectChain">
             <destination>{1eda1905-93e2-4537-ae7f-ef72bd020479}</destination>
         </relationship>
@@ -190,6 +196,11 @@
         </relationship>
         <relationship name="mixer">
             <destination>{d4ca27c7-7e54-4517-a1d5-0249126f1dbd}</destination>
+        </relationship>
+    </object>
+    <object class="AutomationTrack" id="{2314e8e9-4d96-4d79-b806-3e509c47472e}">
+        <relationship name="automator">
+            <destination>{b69e025e-c970-4bd5-857c-745fd305c711}</destination>
         </relationship>
     </object>
     <object class="MixerBusEffectChain" id="{4b8d9834-9115-42ff-a564-480fe4a5c9e8}">
@@ -733,9 +744,16 @@
             <destination>{a3d464e6-207d-4fb2-b903-d90cce80324d}</destination>
         </relationship>
     </object>
+    <object class="Automator" id="{b69e025e-c970-4bd5-857c-745fd305c711}">
+        <property name="nameOfPropertyBeingAutomated">
+            <value>volume</value>
+        </property>
+    </object>
     <object class="MixerBusEffectChain" id="{1eda1905-93e2-4537-ae7f-ef72bd020479}">
         <relationship name="effects">
             <destination>{9e3059ec-3fda-47f8-b9e6-86246bde9373}</destination>
+            <destination>{c8ad101e-e877-4fc0-b5e5-0e55cc4682a8}</destination>
+            <destination>{c5bd5aba-4a7c-43e3-88da-b53620caf30c}</destination>
         </relationship>
     </object>
     <object class="MixerBusPanner" id="{816977aa-6575-4f6f-a1cc-1f42eab4b2b2}"/>
@@ -1194,6 +1212,61 @@
         </relationship>
     </object>
     <object class="MixerBusFader" id="{9e3059ec-3fda-47f8-b9e6-86246bde9373}"/>
+    <object class="SFXReverbEffect" id="{c8ad101e-e877-4fc0-b5e5-0e55cc4682a8}">
+        <property name="decayTime">
+            <value>550</value>
+        </property>
+        <property name="earlyDelay">
+            <value>18</value>
+        </property>
+        <property name="lateDelay">
+            <value>28.5</value>
+        </property>
+        <property name="HFReference">
+            <value>2600</value>
+        </property>
+        <property name="HFDecayRatio">
+            <value>34.5</value>
+        </property>
+        <property name="diffusion">
+            <value>68.5</value>
+        </property>
+        <property name="density">
+            <value>68.5</value>
+        </property>
+        <property name="lowShelfFrequency">
+            <value>170</value>
+        </property>
+        <property name="lowShelfGain">
+            <value>-2.5</value>
+        </property>
+        <property name="highCut">
+            <value>2200</value>
+        </property>
+        <property name="earlyLateMix">
+            <value>45</value>
+        </property>
+        <property name="wetLevel">
+            <value>-7</value>
+        </property>
+        <property name="dryLevel">
+            <value>-0.5</value>
+        </property>
+    </object>
+    <object class="ThreeEQEffect" id="{c5bd5aba-4a7c-43e3-88da-b53620caf30c}">
+        <property name="lowGain">
+            <value>-1.5</value>
+        </property>
+        <property name="midGain">
+            <value>0.5</value>
+        </property>
+        <property name="lowCrossover">
+            <value>700</value>
+        </property>
+        <property name="highCrossover">
+            <value>4200</value>
+        </property>
+    </object>
     <object class="AutomationPoint" id="{1e2b2b93-7559-4e57-b50e-f0ff26feec5f}">
         <property name="position">
             <value>20.544137466307273</value>

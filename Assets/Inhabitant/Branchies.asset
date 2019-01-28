@@ -16,3 +16,4 @@ MonoBehaviour:
   color: {r: 1, g: 0, b: 0, a: 1}
   preference: {fileID: 11400000, guid: 2c9c27e68087913c6b0a7d9524438429, type: 2}
   perA: 0.5
+  InhabEvent: event:/SFX/MedGuys

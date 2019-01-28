@@ -76,6 +76,11 @@ public class treegrow : MonoBehaviour
         }
     }
 
+    // FMOD Events
+    [FMODUnity.EventRef]
+    public string GrowEvent;
+    FMOD.Studio.EventInstance Grow;
+
     public LineRenderer trunk;
     public GameObject leaf_prefab;
     public GameObject fruit_prefab;
@@ -169,6 +174,9 @@ public class treegrow : MonoBehaviour
         grow_steps = 0;
         grewLeaves = false;
         grewFruit = false;
+        
+        Grow = FMODUnity.RuntimeManager.CreateInstance(GrowEvent);
+        Grow.start();
     }
 
     private void grow(int degree) {

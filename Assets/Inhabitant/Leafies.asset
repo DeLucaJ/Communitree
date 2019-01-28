@@ -16,3 +16,4 @@ MonoBehaviour:
   color: {r: 1, g: 1, b: 0, a: 1}
   preference: {fileID: 11400000, guid: d56b8f7ffb79bdd81806895c7caa3ee9, type: 2}
   perA: 0.5
+  InhabEvent: event:/SFX/SmallGuys
