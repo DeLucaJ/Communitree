@@ -17,6 +17,7 @@ public class Lightray : MonoBehaviour {
     public float radius = 18f;
     public float rayLen = 20f;
     private float lastX;
+    private float lastPos;
 
     void Start()
     {
@@ -25,15 +26,17 @@ public class Lightray : MonoBehaviour {
         center = transform.position;
         lastX = -Mathf.Infinity;
         MakeRays();
+        lastPos = Camera.main.transform.position.y;
     }
 
     void Update()
     {
-        bool anim = Camera.main.GetComponent<CameraController>().animating;
-        if (anim)
-        {
-            radius += 0.25f;
-            rayLen += 2f;
+        float pos = Camera.main.transform.position.y;
+        if (lastPos < pos)
+        {            
+            radius += (pos - lastPos) * 2;
+            rayLen += (pos - lastPos) * 4;
+            lastPos = pos;
         }
 
         Raycasting(rayLen);
