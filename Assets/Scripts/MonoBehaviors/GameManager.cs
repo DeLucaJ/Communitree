@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -25,12 +26,15 @@ public class GameManager : MonoBehaviour
 
     private Queue<GameObject> inhabitantsQueue = new Queue<GameObject>();
     private float elapsedTime = 0.0f;
+    private CardDock cd;
+    private int score = 0;
 
     // Start is called before the first frame update
     void Start()
     {
         FillDictionaries();
         SetTreeVals();
+        cd = GameObject.Find("Card Dock").GetComponent<CardDock>();
     }
 
     // Update is called once per frame
@@ -39,6 +43,8 @@ public class GameManager : MonoBehaviour
         UpdateActions();
         UpdateInhabitants();
         UpdateQueue();
+
+        cd.scoreUI.GetComponentInChildren<Text>().text = score.ToString();
     }
 
     void FillDictionaries() {
@@ -146,6 +152,7 @@ public class GameManager : MonoBehaviour
             inhabitantsQueue.Enqueue(current);
             //Debug.Log(inhabitantsQueue.Count);
             inhabitantScores[type.name]++;
+            score++;
 
             Inhab = FMODUnity.RuntimeManager.CreateInstance(type.InhabEvent);
             Inhab.start();
