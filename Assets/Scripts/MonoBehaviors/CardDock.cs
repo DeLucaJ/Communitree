@@ -14,6 +14,8 @@ public class CardDock : MonoBehaviour
     public float deathDelay;
     public int cardLimit;
 
+    public GameObject scoreUI;
+
     private GameObject[] cards = new GameObject[3];
     private bool resetting = false;
     private float elapsedTime = 0.0f;
@@ -53,6 +55,10 @@ public class CardDock : MonoBehaviour
                 elapsedTime = 0.0f;
                 resetting = false;
             }
+        }
+
+        if (usedCards >= cardLimit) {
+            scoreUI.SetActive(true);
         }
     }
 
