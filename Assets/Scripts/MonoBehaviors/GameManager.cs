@@ -13,7 +13,10 @@ public class GameManager : MonoBehaviour
     public Vector3 instancePoint;
     public Vector3 spawnPoint;
     public float spawnDelay;
-    
+
+    [FMODUnity.EventRef]
+    FMOD.Studio.EventInstance Inhab;
+
     [HideInInspector]
     public Dictionary<string, int> attributeScores = new Dictionary<string, int>();
 
@@ -143,6 +146,9 @@ public class GameManager : MonoBehaviour
             inhabitantsQueue.Enqueue(current);
             //Debug.Log(inhabitantsQueue.Count);
             inhabitantScores[type.name]++;
+
+            Inhab = FMODUnity.RuntimeManager.CreateInstance(type.InhabEvent);
+            Inhab.start();
         }
     }
 

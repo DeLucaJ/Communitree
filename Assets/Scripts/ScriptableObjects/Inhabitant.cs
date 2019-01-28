@@ -9,4 +9,7 @@ public class Inhabitant : ScriptableObject
     public Color color;
     public Action preference;
     public float perA;
+
+    [FMODUnity.EventRef]
+    public string InhabEvent;
 }
