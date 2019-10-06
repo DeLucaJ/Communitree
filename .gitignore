@@ -66,6 +66,11 @@ Assets/_Scenes/[mM]itch*
 Assets/_Scenes/[mM]egan*
 Assets/_Scenes/[jJ]oe*
 
+# Ignore our name type files
+[jJ]oe*
+[mM]egan*
+[mM]itch*
+
 # FMOD Integration <- potentially wrong
 # /Assets/FMODStudioCache.asset
 # /Assets/FMODStudioCache.asset.meta
