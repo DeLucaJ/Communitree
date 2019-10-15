@@ -71,9 +71,9 @@ Assets/_Scenes/[jJ]oe*
 [mM]egan*
 [mM]itch*
 
-# FMOD Integration <- potentially wrong
-# /Assets/FMODStudioCache.asset
-# /Assets/FMODStudioCache.asset.meta
-# /Assets/StreamingAssets*.*
-# fmod.log
-# fmod_editor.log
+# FMOD Integration
+fmod.log
+fmod_editor.log
+
+# FMOD Studio project
+
