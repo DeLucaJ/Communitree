@@ -6,16 +6,21 @@ public class EventHolder
 {
     public List<EventEntry> entries;
 
-    public EventHolder()
+    public EventHolder(List<EventEntry> entries = null)
     {
-        entries = new List<EventEntry>();
+        if (entries != null) {
+            this.entries = entries;
+        }
+        else {
+            this.entries = new List<EventEntry>();
+        }
     }
 
-    public void Invoke()
+    public void Invoke(object[] callerParams = null)
     {
         foreach (EventEntry entry in entries)
         {
-            entry.Invoke();
+            entry.Invoke(callerParams);
         }
     }
 }

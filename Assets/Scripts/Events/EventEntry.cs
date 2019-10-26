@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class EventEntry
 {
+    public bool reviever; // Takes its parameters from the EventHolder
     public Delegate del;
-    public object[] paramVals;
+    public object[] paramVals; // if no caller params are sent, these would be the default params
 
-    public EventEntry(Delegate del, object[] paramVals = null)
+    public EventEntry(Delegate del, object[] paramVals = null, bool reciever = false)
     {
         if (del != null && del.Method != null)
         {
@@ -17,13 +18,18 @@ public class EventEntry
             else paramVals = new object[0];
             //this.paramVals = new object[this.del.Method.GetParameters().Length];
         }
+        this.reviever = reciever;
     }
 
-    public void Invoke()
+    public void Invoke(object[] callerParams)
     {
-        if(del != null /*&& paramVals != null*/)
-        {
-            this.del.Method.Invoke(del.Target, paramVals);
+        if (del != null) {
+            if (this.reviever && callerParams != null) {
+                this.del.Method.Invoke(del.Target, callerParams);
+            }
+            else {
+                this.del.Method.Invoke(del.Target, this.paramVals);
+            }
         }
     }
 }
