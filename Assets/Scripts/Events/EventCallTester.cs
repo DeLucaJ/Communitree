@@ -6,6 +6,7 @@ using UnityEngine;
 public class EventTester2 : MonoBehaviour
 {
     private float time = 0.0f;
+    private int rtriggered = 0;
     private EventEntry te;
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,8 @@ public class EventTester2 : MonoBehaviour
         {
             time -= 1.0f;
             EventHandler.TriggerEvent("timeEvent");
+            rtriggered++;
+            EventHandler.TriggerEvent("recieverEvent", new object[2] { rtriggered, 10 - rtriggered });
         }
     }
 

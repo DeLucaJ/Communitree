@@ -19,9 +19,9 @@ public class EventHandler : MonoBehaviour
         if(!current.eventDict.ContainsKey(name)) current.eventDict.Add(name, new EventHolder());
     }
 
-    public static void TriggerEvent(string name)
+    public static void TriggerEvent(string name, object[] callerParams = null)
     {
-        if(current.eventDict.ContainsKey(name)) current.eventDict[name].Invoke();
+        if(current.eventDict.ContainsKey(name)) current.eventDict[name].Invoke(callerParams);
     }
 
     public static void AddListener(string name, EventEntry entry)

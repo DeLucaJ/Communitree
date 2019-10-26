@@ -10,6 +10,7 @@ public class EventTester : MonoBehaviour
     private EventEntry te1;
     private EventEntry te2;
     private EventEntry te3;
+    private EventEntry rc1;
 
     // Start is called before the first frame update
     void Start()
@@ -25,9 +26,14 @@ public class EventTester : MonoBehaviour
         te3 = new EventEntry(
             new Action(TimeEvent3)
         );
+        rc1 = new EventEntry(
+            new Action<int, int>(RecieverEvent1),
+            reciever: true
+        );
         EventHandler.AddListener("timeEvent", te1);
         EventHandler.AddListener("timeEvent", te2);
         EventHandler.AddListener("timeEvent", te3);
+        EventHandler.AddListener("recieverEvent", rc1);
     }
 
     void OnDestroy()
@@ -35,6 +41,7 @@ public class EventTester : MonoBehaviour
         EventHandler.RemoveListener("timeEvent", te1);
         EventHandler.RemoveListener("timeEvent", te2);
         EventHandler.RemoveListener("timeEvent", te3);
+        EventHandler.RemoveListener("recieverEvent", rc1);
     }
 
     // Update is called once per frame
@@ -56,5 +63,9 @@ public class EventTester : MonoBehaviour
     {
         limit--;
         Debug.Log("TE3 " + limit);
+    }
+
+    void RecieverEvent1(int t, int x) {
+        Debug.Log("Recieved " + t + " & " + x);
     }
 }
