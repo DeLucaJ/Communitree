@@ -5,15 +5,11 @@ using UnityEngine;
 public class Hand : MonoBehaviour
 {
     public LinkedList<HandSlot> slots;
+    public CardDock dock;
 
     public void AddCard(Card card) {
         HandSlot slot = new HandSlot(card, this);
         slots.AddLast(slot);
         slot.SetNode(slots.Last);
     }
-
-    /* public void DisplayCards()
-    {
-
-    } */
 }
