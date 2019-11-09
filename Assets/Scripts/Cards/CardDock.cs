@@ -5,7 +5,6 @@ using UnityEngine;
 public class CardDock : MonoBehaviour
 {
     public Hand hand;
-
     public Stack<Card> played;
 
     // Start is called before the first frame update

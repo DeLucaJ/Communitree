@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class Hand : MonoBehaviour
 {
-    public Card[] cards;
+    public LinkedList<HandSlot> slots;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public void AddCard(Card card) {
+        HandSlot slot = new HandSlot(card, this);
+        slots.AddLast(slot);
+        slot.SetNode(slots.Last);
     }
 
-    // Update is called once per frame
-    void Update()
+    /* public void DisplayCards()
     {
-        
-    }
+
+    } */
 }

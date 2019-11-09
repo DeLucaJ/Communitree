@@ -5,9 +5,12 @@ using UnityEngine;
 public class Card : MonoBehaviour
 {
     public CardType cardType;
+    [HideInInspector]
+    public bool isActive = false;
 
-    void PlayCard() {
-        cardType.Trigger(new object[] {});
+    public void Play(object[] args = null) {
+        this.isActive = true;
+        cardType.Trigger(args);
     }
 
     // Called when the mouse clicks on the Card
@@ -23,6 +26,7 @@ public class Card : MonoBehaviour
     // Called every frame the mouse is over the Card
     void OnMouseOver() {
         // Make the Frame glow
+        // Display Flavor text
     }
 
     // Called when the mouse first goes over the Card image
