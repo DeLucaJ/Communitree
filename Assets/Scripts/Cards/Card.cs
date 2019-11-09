@@ -11,6 +11,7 @@ public class Card : MonoBehaviour
     public void Play(object[] args = null) {
         this.isActive = true;
         cardType.Trigger(args);
+        EventHandler.TriggerEvent("cardPlayed", new object[] { cardType });
     }
 
     // Called when the mouse clicks on the Card
