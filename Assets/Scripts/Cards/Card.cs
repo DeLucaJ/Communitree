@@ -5,7 +5,6 @@ using UnityEngine;
 public class Card : MonoBehaviour
 {
     public CardType cardType;
-    // public int value;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +19,6 @@ public class Card : MonoBehaviour
     }
 
     void PlayCard() {
-        cardType.Trigger(new object[] { /* value */ });
+        cardType.Trigger(new object[] {});
     }
 }
